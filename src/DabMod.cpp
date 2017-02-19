@@ -126,6 +126,7 @@ int launch_modulator(int argc, char* argv[])
     int useZeroMQOutput = 0;
     std::string zmqOutputSocketType = "";
     int useFileOutput = 0;
+    int normalizeFileOutput = 0;
     std::string fileOutputFormat = "complexf";
     int useUHDOutput = 0;
 
@@ -192,7 +193,7 @@ int launch_modulator(int argc, char* argv[])
     tzset();
 
     while (true) {
-        int c = getopt(argc, argv, "a:C:c:f:F:g:G:hlm:o:O:r:T:u:V");
+        int c = getopt(argc, argv, "a:C:c:f:F:g:G:hlm:n:o:O:r:T:u:V");
         if (c == -1) {
             break;
         }
@@ -247,6 +248,9 @@ int launch_modulator(int argc, char* argv[])
             break;
         case 'm':
             dabMode = strtol(optarg, NULL, 0);
+            break;
+        case 'n':
+            normalizeFileOutput = strtol(optarg, NULL, 0);
             break;
         case 'r':
             outputRate = strtol(optarg, NULL, 0);
@@ -714,6 +718,8 @@ int launch_modulator(int argc, char* argv[])
 
     if (useFileOutput) {
         if (fileOutputFormat == "complexf") {
+            if (normalizeFileOutput)
+                normalise = 1.0f / normalise_factor;
             output = make_shared<OutputFile>(outputName);
         }
         else if (fileOutputFormat == "s8") {
