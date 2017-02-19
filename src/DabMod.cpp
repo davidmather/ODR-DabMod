@@ -445,6 +445,7 @@ int launch_modulator(int argc, char* argv[])
                 throw std::runtime_error("Configuration error");
             }
             useFileOutput = 1;
+            normalizeFileOutput = pt.get<int>("fileoutput.normalize",0);
 
             fileOutputFormat = pt.get("fileoutput.format", fileOutputFormat);
         }

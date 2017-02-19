@@ -58,6 +58,7 @@ void printUsage(char* progName)
             " [-h]"
             " [-l]"
             " [-m dabMode]"
+            " [-n normalizeFile]"
             " [-r samplingRate]"
             "\n", progName);
     fprintf(out, "Where:\n");
@@ -81,6 +82,7 @@ void printUsage(char* progName)
     fprintf(out, "-h:            Print this help.\n");
     fprintf(out, "-l:            Loop file when reach end of file.\n");
     fprintf(out, "-m mode:       Set DAB mode: (0: auto, 1-4: force).\n");
+    fprintf(out, "-n normalize:  Bounds the maximum of a complex float output file to 1.\n");
     fprintf(out, "-r rate:       Set output sampling rate (default: 2048000).\n\n");
 }
 
